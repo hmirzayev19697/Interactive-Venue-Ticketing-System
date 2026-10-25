@@ -1,0 +1,136 @@
+:root{
+  --bg: #374c6f;
+  --panel: #12203a;
+  --panel-light: #1a2b4b;
+  --border: #253a5e;
+  --text: #e6ecf5;
+  --muted: #8a9ab5;
+  --accent: #6d9eea;
+  --accent-hover: #8fb4f0;
+  --success: #346e4c;
+  --error: #6b2f2f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Helvetica, Arial, sans-serif; 
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-weight: 450;
+}
+
+.site-header{
+    border-bottom: 1.5px solid var(--border) ;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    max-width: 1400px;
+    height: 64px;
+    margin: 0 auto;
+    padding: 0 32px;
+}
+
+.navbar a {
+    color: var(--text);
+    opacity: 0.8;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    opacity: 1;
+}
+
+.navbar .brand {
+    opacity: 1;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.event-bar {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 32px 0;
+}
+
+.event-label {
+    margin: 0 0 4px;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+.event-bar h1 {
+    font-size: 34px;
+    line-height: 1.2;
+}
+
+.event-meta {
+    margin: 6px 0 0;
+    font-size: 15px;
+    opacity: 0.85;
+}
+
+.main-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px 32px;
+}
+
+.panel,
+#seats {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.panel h2,
+#seats h2 {
+    font-size: 15px;
+    margin-bottom: 12px;
+}
+
+.seats-head,
+.cart-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.seats-head h2,
+.cart-head h2 {
+    margin-bottom: 0;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.empty {
+    color: var(--muted);
+    font-size: 14px;
+}
+
