@@ -134,6 +134,41 @@ h1, h2, h3 {
     gap: 24px;
 }
 
+/* venue map */
+.map-viewport {
+    height: 560px;
+    border-radius: 4px;
+    background: #0c1727;
+    border: 1px solid var(--border);
+    overflow: auto;
+}
+
+.venue {
+    display: grid;
+    grid-template-areas:
+        ".  stage ."
+        "VL GZ    VR"
+        "VL SD    VR"
+        "BL EC    BR";
+    gap: 16px 40px;
+    justify-items: center;
+    align-items: start;
+    width: max-content;
+    padding: 40px;
+}
+
+.stage {
+    width: 520px;
+    padding: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--panel-light);
+    border-radius: 3px;
+}
+
 /* price legend with legendary prices */
 .legend {
     display: flex;
@@ -179,6 +214,88 @@ h1, h2, h3 {
 }
 
 .color-box.balcony {
+    background: #8a93a5;
+}
+
+.section h3 {
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-bottom: 3px;
+}
+
+.section.left,
+.section.right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3px;
+    width: 100px;
+    padding: 10px 8px;
+    background: var(--panel-light);
+    border-radius: 6px;
+}
+
+.section.left {
+    flex-direction: row-reverse;
+    border-right: 3px solid var(--muted);
+}
+
+.section.right {
+    border-left: 3px solid var(--muted);
+}
+
+.section.left h3,
+.section.right h3 {
+    width: 100%;
+}
+
+.section.left .row,
+.section.right .row {
+    flex-direction: column;
+    margin-bottom: 0;
+}
+
+/* seats */
+.seat {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    background: var(--muted);
+    cursor: pointer;
+}
+
+.seat:hover {
+    opacity: 0.7;
+}
+
+.seat.vip {
+    background: #62130a;
+}
+
+.seat.gold {
+    background: #ac7206;
+}
+
+.seat.standard {
+    background: #194a78;
+}
+
+.seat.economy {
+    background: #0d4e1a;
+}
+
+.seat.balcony {
     background: #8a93a5;
 }
 
