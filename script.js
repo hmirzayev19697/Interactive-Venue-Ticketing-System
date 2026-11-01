@@ -27,7 +27,8 @@ function renderSummary() {
     venue.sections.forEach(section => {
         total += section.rows * section.seats;
     });
-    summaryEl.textContent = `${total} seats · ${venue.sections.length} sections`;
+    const available = total - venue.sold.length;
+    summaryEl.textContent = `${total} seats - ${available} available`;
 }
 
 // builds the whole venue map from the data in data.js
@@ -54,7 +55,7 @@ function createSection(section) {
     sectionEl.style.gridArea = section.id;
 
     const title = document.createElement("h3");
-    title.textContent = `${section.name} · ${formatPrice(category.price)}`;
+    title.textContent = `${section.name} - ${formatPrice(category.price)}`;
     sectionEl.appendChild(title);
 
     for (let r = 0; r < section.rows; r++) {
@@ -88,9 +89,14 @@ function createRowLabel(letter) {
 
 // creates one seat button and remembers its info in the seats object
 function createSeat(section, letter, number) {
+    const id = `${section.id}-${letter}${number}`;
     const seat = document.createElement("button");
     seat.className = "seat " + section.category;
-    seat.dataset.id = `${section.id}-${letter}${number}`;
+    seat.dataset.id = id;
+
+    if (venue.sold.includes(id)) {
+        seat.classList.add("sold");
+    }
     return seat;
 }
 

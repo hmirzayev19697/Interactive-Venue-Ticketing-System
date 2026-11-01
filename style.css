@@ -192,6 +192,10 @@ h1, h2, h3 {
     gap: 8px;
 }
 
+.legend.states {
+    margin-top: 8px;
+}
+
 .color-box {
     width: 14px;
     height: 14px;
@@ -216,6 +220,14 @@ h1, h2, h3 {
 
 .color-box.balcony {
     background: #8a93a5;
+}
+
+.color-box.available {
+    background: var(--muted);
+}
+
+.color-box.sold {
+    background: #2a3a55;
 }
 
 .section h3 {
@@ -308,6 +320,11 @@ h1, h2, h3 {
 
 .seat.balcony {
     background: #8a93a5;
+}
+
+.seat.sold {
+    background: #2a3a55;
+    cursor: not-allowed;
 }
 
 .empty {
