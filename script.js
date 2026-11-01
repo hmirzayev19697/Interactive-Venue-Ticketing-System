@@ -54,20 +54,36 @@ function createSection(section) {
     sectionEl.style.gridArea = section.id;
 
     const title = document.createElement("h3");
-    title.textContent = `${section.name} - ${formatPrice(category.price)}`;
+    title.textContent = `${section.name} · ${formatPrice(category.price)}`;
     sectionEl.appendChild(title);
 
     for (let r = 0; r < section.rows; r++) {
         const row = document.createElement("div");
         row.className = "row";
         const letter = ROW_LETTERS[r];
+        row.appendChild(createRowLabel(letter));
 
         for (let number = 1; number <= section.seats; number++) {
             row.appendChild(createSeat(section, letter, number));
+
+            if (section.aisles && section.aisles.includes(number)) {
+                const aisle = document.createElement("span");
+                aisle.className = "aisle";
+                row.appendChild(aisle);
+            }
         }
+        row.appendChild(createRowLabel(letter));
         sectionEl.appendChild(row);
     }
     return sectionEl;
+}
+
+// the letter shown at the start and end of each row
+function createRowLabel(letter) {
+    const label = document.createElement("span");
+    label.className = "row-label";
+    label.textContent = letter;
+    return label;
 }
 
 // creates one seat button and remembers its info in the seats object

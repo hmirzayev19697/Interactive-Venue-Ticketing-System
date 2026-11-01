@@ -1,5 +1,4 @@
 const venue = {
-    name: "Royal Blue",
     currency: "AZN",
 
     categories: {
@@ -11,9 +10,9 @@ const venue = {
     },
 
     sections: [
-        { id: "GZ", name: "Gold Zone", category: "gold", rows: 5, seats: 24 },
-        { id: "SD", name: "Standard", category: "standard", rows: 8, seats: 30 },
-        { id: "EC", name: "Economy", category: "economy", rows: 10, seats: 32 },
+        { id: "GZ", name: "Gold Zone", category: "gold", rows: 5, seats: 24, aisles: [6, 18] },
+        { id: "SD", name: "Standard", category: "standard", rows: 8, seats: 30, aisles: [7, 23] },
+        { id: "EC", name: "Economy", category: "economy", rows: 10, seats: 32, aisles: [8, 24] },
         { id: "VL", name: "Left VIP Balcony", category: "vip", rows: 4, seats: 12, side: "left" },
         { id: "VR", name: "Right VIP Balcony", category: "vip", rows: 4, seats: 12, side: "right" },
         { id: "BL", name: "Left Balcony", category: "balcony", rows: 4, seats: 8, side: "left" },

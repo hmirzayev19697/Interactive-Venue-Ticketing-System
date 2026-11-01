@@ -128,6 +128,11 @@ h1, h2, h3 {
     margin-bottom: 0;
 }
 
+/* stops the big map from making the page wider */
+#seats {
+    min-width: 0;
+}
+
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -187,10 +192,6 @@ h1, h2, h3 {
     gap: 8px;
 }
 
-.legend strong {
-    color: var(--text);
-}
-
 .color-box {
     width: 14px;
     height: 14px;
@@ -221,7 +222,6 @@ h1, h2, h3 {
     margin-bottom: 8px;
     text-align: center;
     font-size: 12px;
-    font-weight: 500;
     color: var(--muted);
 }
 
@@ -262,6 +262,17 @@ h1, h2, h3 {
 .section.right .row {
     flex-direction: column;
     margin-bottom: 0;
+}
+
+.row-label {
+    width: 14px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.aisle {
+    width: 10px;
 }
 
 /* seats */
