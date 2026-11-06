@@ -226,6 +226,11 @@ h1, h2, h3 {
     background: var(--muted);
 }
 
+.color-box.inspected {
+    outline: 2px solid var(--text);
+    outline-offset: 1px;
+}
+
 .color-box.sold {
     background: #2a3a55;
 }
@@ -322,13 +327,57 @@ h1, h2, h3 {
     background: #8a93a5;
 }
 
+.seat.inspected {
+    outline: 2px solid var(--text);
+    outline-offset: 1px;
+}
+
 .seat.sold {
     background: #2a3a55;
     cursor: not-allowed;
 }
 
 .empty {
+    margin: 0;
     color: var(--muted);
     font-size: 14px;
+}
+
+/* seat details */
+.details {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 16px;
+    margin: 0;
+    font-size: 14px;
+}
+
+.details dt {
+    color: var(--muted);
+}
+
+.details dd {
+    margin: 0;
+    text-align: right;
+}
+
+.status {
+    justify-self: end;
+    padding: 0 10px;
+    border-radius: 10px;
+    background: var(--success);
+}
+
+.status.is-sold {
+    background: var(--error);
+}
+
+.price {
+    margin: 16px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 26px;
+    font-weight: 600;
+    text-align: right;
 }
 

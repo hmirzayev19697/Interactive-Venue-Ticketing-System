@@ -2,6 +2,11 @@ const venueEl = document.getElementById("venue");
 const ROW_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const legendEl = document.getElementById("legend");
 const summaryEl = document.getElementById("seat-summary");
+const detailsEl = document.getElementById("seat-details");
+
+// all seats by their id, e.g. seats["GZ-A1"]
+const seats = {};
+let inspectedId = null;
 
 // turns a number into a price, e.g. 450 AZN
 function formatPrice(amount) {
@@ -94,12 +99,60 @@ function createSeat(section, letter, number) {
     seat.className = "seat " + section.category;
     seat.dataset.id = id;
 
-    if (venue.sold.includes(id)) {
+    const category = venue.categories[section.category];
+    const sold = venue.sold.includes(id);
+    if (sold) {
         seat.classList.add("sold");
     }
+
+    seat.addEventListener("click", () => inspectSeat(id));
+
+    seats[id] = {
+        id: id,
+        section: section.name,
+        row: letter,
+        number: number,
+        category: category.name,
+        price: category.price,
+        sold: sold,
+        el: seat
+    };
     return seat;
+}
+
+// called when a seat is clicked, highlights it and shows its details
+function inspectSeat(id) {
+    if (inspectedId) {
+        seats[inspectedId].el.classList.remove("inspected");
+    }
+    inspectedId = id;
+    seats[id].el.classList.add("inspected");
+    renderDetails();
+}
+
+// fills the Seat Details panel on the right
+function renderDetails() {
+    if (!inspectedId) {
+        detailsEl.innerHTML = `<p class="empty">Click a seat on the map to see its details.</p>`;
+        return;
+    }
+
+    const seat = seats[inspectedId];
+    const status = seat.sold ? "Unavailable" : "Available";
+
+    detailsEl.innerHTML = `
+        <dl class="details">
+            <dt>Section</dt><dd>${seat.section}</dd>
+            <dt>Row</dt><dd>${seat.row}</dd>
+            <dt>Seat</dt><dd>${seat.number}</dd>
+            <dt>Category</dt><dd>${seat.category}</dd>
+            <dt>Status</dt><dd class="status ${seat.sold ? "is-sold" : ""}">${status}</dd>
+        </dl>
+        <p class="price">${formatPrice(seat.price)}</p>
+    `;
 }
 
 renderLegend();
 renderSummary();
 renderVenue();
+renderDetails();
