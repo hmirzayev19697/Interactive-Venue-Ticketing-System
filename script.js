@@ -128,7 +128,6 @@ function inspectSeat(id) {
     inspectedId = id;
     seats[id].el.classList.add("inspected");
     renderDetails();
-    resetView();
 }
 
 // fills the Seat Details panel on the right
