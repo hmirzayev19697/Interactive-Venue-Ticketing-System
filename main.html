@@ -27,8 +27,18 @@
         <section id = "seats">
             <div class="seats-head">
                 <h2>Choose Your Seats</h2>
+                <div class="map-controls">
+                    <button class="control" id="zoom-out" title="Zoom out">-</button>
+                    <span class="zoom-level" id="zoom-level">100%</span>
+                    <button class="control" id="zoom-in" title="Zoom in">+</button>
+                    <button class="control" id="move-left" title="Move left">←</button>
+                    <button class="control" id="move-up" title="Move up">↑</button>
+                    <button class="control" id="move-down" title="Move down">↓</button>
+                    <button class="control" id="move-right" title="Move right">→</button>
+                    <button class="control" id="reset-view">Reset view</button>
+                </div>
             </div>
-            <div class="map-viewport">
+            <div class="map-viewport" id="map-viewport">
                 <div class="venue" id="venue"></div>
             </div>
             <ul class="legend" id="legend"></ul>
@@ -53,6 +63,7 @@
     </main>
 
     <script src="data.js"></script>
+    <script src="map.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

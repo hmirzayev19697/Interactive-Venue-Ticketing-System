@@ -139,16 +139,58 @@ h1, h2, h3 {
     gap: 24px;
 }
 
+/* zoom and move buttons */
+.map-controls {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.control {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.control:hover {
+    background: var(--panel-light);
+}
+
+.control:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.zoom-level {
+    min-width: 44px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+}
+
 /* venue map */
 .map-viewport {
+    position: relative;
     height: 560px;
     border-radius: 4px;
     background: #0c1727;
     border: 1px solid var(--border);
-    overflow: auto;
+    overflow: hidden;
 }
 
 .venue {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: center;
     display: grid;
     grid-template-areas:
         ".  stage ."
