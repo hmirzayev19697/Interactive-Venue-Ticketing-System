@@ -196,6 +196,9 @@ h1, h2, h3 {
     background: #0c1727;
     border: 1px solid var(--border);
     overflow: hidden;
+    /* (bonus) no text selecting and no page scrolling while dragging the map */
+    user-select: none;
+    touch-action: none;
 }
 
 .venue {

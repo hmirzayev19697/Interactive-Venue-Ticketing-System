@@ -120,7 +120,12 @@ function createSeat(section, letter, number) {
         seat.classList.add("sold");
     }
 
-    seat.addEventListener("click", () => inspectSeat(id));
+    seat.addEventListener("click", () => {
+        // (bonus) after dragging the map the click should not select a seat
+        if (!wasDragged) {
+            inspectSeat(id);
+        }
+    });
 
     seats[id] = {
         id: id,

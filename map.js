@@ -87,3 +87,55 @@ document.getElementById("move-down").addEventListener("click", () => move(0, -MO
 document.getElementById("move-left").addEventListener("click", () => move(MOVE_STEP, 0));
 document.getElementById("move-right").addEventListener("click", () => move(-MOVE_STEP, 0));
 document.getElementById("reset-view").addEventListener("click", resetView);
+
+// (bonus) mouse wheel zoom and drag to move the map
+// pointer events work for both the mouse and a finger on a phone
+const WHEEL_STEP = 0.1;
+
+viewport.addEventListener("wheel", event => {
+    event.preventDefault();
+    // touchpads send many small scrolls, so zoom by how much was scrolled
+    let amount = -event.deltaY / 50;
+    // a mouse wheel sends one big scroll, so it zooms only one step at a time
+    if (amount > WHEEL_STEP) {
+        amount = WHEEL_STEP;
+    }
+    if (amount < -WHEEL_STEP) {
+        amount = -WHEEL_STEP;
+    }
+    zoom(amount);
+});
+
+let isDragging = false;
+let wasDragged = false;
+let startX = 0;
+let startY = 0;
+
+viewport.addEventListener("pointerdown", event => {
+    isDragging = true;
+    wasDragged = false;
+    startX = event.clientX;
+    startY = event.clientY;
+});
+
+window.addEventListener("pointermove", event => {
+    if (!isDragging) {
+        return;
+    }
+    const dx = event.clientX - startX;
+    const dy = event.clientY - startY;
+
+    // a very small movement still counts as a click
+    if (Math.abs(dx) > 4 || Math.abs(dy) > 4) {
+        wasDragged = true;
+    }
+    if (wasDragged) {
+        move(dx, dy);
+        startX = event.clientX;
+        startY = event.clientY;
+    }
+});
+
+window.addEventListener("pointerup", () => {
+    isDragging = false;
+});
