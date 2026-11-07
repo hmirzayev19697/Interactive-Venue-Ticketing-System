@@ -555,3 +555,49 @@ h1, h2, h3 {
     font-size: 22px;
 }
 
+/* tablets */
+@media (max-width: 1000px) {
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+}
+
+/* phones */
+@media (max-width: 640px) {
+    .navbar {
+        gap: 16px;
+        padding: 0 16px;
+    }
+
+    .event-bar {
+        padding: 20px 16px 0;
+    }
+
+    .event-bar h1 {
+        font-size: 26px;
+    }
+
+    .main-layout {
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .seats-head {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .map-viewport {
+        height: 380px;
+    }
+
+    .sidebar {
+        grid-template-columns: 1fr;
+    }
+}

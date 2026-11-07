@@ -15,20 +15,25 @@ let moveY = 0;
 
 // moves and zooms the map with a CSS transform
 function applyView() {
-    // the middle of the map is not allowed to leave the box
+    // the map can move until its edge reaches the middle of the box,
+    // so every part of it can be reached, even on a small phone screen
     const halfWidth = mapContent.offsetWidth / 2;
     const halfHeight = mapContent.offsetHeight / 2;
-    if (moveX < -halfWidth) {
-        moveX = -halfWidth;
+    const minX = viewport.clientWidth / 2 - halfWidth * scale - halfWidth;
+    const maxX = viewport.clientWidth / 2 + halfWidth * scale - halfWidth;
+    const minY = viewport.clientHeight / 2 - halfHeight * scale - halfHeight;
+    const maxY = viewport.clientHeight / 2 + halfHeight * scale - halfHeight;
+    if (moveX < minX) {
+        moveX = minX;
     }
-    if (moveX > viewport.clientWidth - halfWidth) {
-        moveX = viewport.clientWidth - halfWidth;
+    if (moveX > maxX) {
+        moveX = maxX;
     }
-    if (moveY < -halfHeight) {
-        moveY = -halfHeight;
+    if (moveY < minY) {
+        moveY = minY;
     }
-    if (moveY > viewport.clientHeight - halfHeight) {
-        moveY = viewport.clientHeight - halfHeight;
+    if (moveY > maxY) {
+        moveY = maxY;
     }
 
     mapContent.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
