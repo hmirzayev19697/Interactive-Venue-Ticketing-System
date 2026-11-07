@@ -60,6 +60,18 @@ h1, h2, h3 {
     letter-spacing: 0.5px;
 }
 
+.navbar .nav-cart {
+    margin-left: auto;
+    padding: 6px 14px;
+    border: 1px solid var(--text);
+    border-radius: 8px;
+    opacity: 1;
+}
+
+.nav-cart:hover {
+    background: var(--panel);
+}
+
 .event-bar {
     max-width: 1400px;
     margin: 0 auto;
@@ -273,6 +285,10 @@ h1, h2, h3 {
     outline-offset: 1px;
 }
 
+.color-box.in-cart {
+    background: var(--text);
+}
+
 .color-box.sold {
     background: #2a3a55;
 }
@@ -369,6 +385,10 @@ h1, h2, h3 {
     background: #8a93a5;
 }
 
+.seat.in-cart {
+    background: var(--text);
+}
+
 .seat.inspected {
     outline: 2px solid var(--text);
     outline-offset: 1px;
@@ -421,5 +441,90 @@ h1, h2, h3 {
     font-size: 26px;
     font-weight: 600;
     text-align: right;
+}
+
+.btn-primary {
+    width: 100%;
+    margin-top: 16px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: var(--text);
+    color: var(--bg);
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-primary:disabled {
+    background: var(--panel-light);
+    color: var(--muted);
+    cursor: not-allowed;
+}
+
+.message {
+    margin: 10px 0 0;
+    font-size: 13px;
+}
+
+.message.success {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--success);
+}
+
+.message.error {
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: var(--error);
+}
+
+.count {
+    margin-left: 4px;
+    color: var(--muted);
+}
+
+/* cart */
+.cart-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.cart-seat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.cart-seat span {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.cart-price {
+    font-weight: 600;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    font-size: 16px;
+}
+
+.cart-total strong {
+    font-size: 22px;
 }
 

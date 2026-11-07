@@ -3,10 +3,17 @@ const ROW_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const legendEl = document.getElementById("legend");
 const summaryEl = document.getElementById("seat-summary");
 const detailsEl = document.getElementById("seat-details");
+const addBtn = document.getElementById("add-to-cart");
+const messageEl = document.getElementById("message");
+const cartList = document.getElementById("cart-list");
+const cartTotalEl = document.getElementById("cart-total");
+const cartCountEl = document.getElementById("cart-count");
+const navCartCountEl = document.getElementById("nav-cart-count");
 
 // all seats by their id, e.g. seats["GZ-A1"]
 const seats = {};
 let inspectedId = null;
+let cart = [];
 
 // turns a number into a price, e.g. 450 AZN
 function formatPrice(amount) {
@@ -127,6 +134,7 @@ function inspectSeat(id) {
     }
     inspectedId = id;
     seats[id].el.classList.add("inspected");
+    showMessage("");
     renderDetails();
 }
 
@@ -134,11 +142,18 @@ function inspectSeat(id) {
 function renderDetails() {
     if (!inspectedId) {
         detailsEl.innerHTML = `<p class="empty">Click a seat on the map to see its details.</p>`;
+        addBtn.disabled = true;
         return;
     }
 
     const seat = seats[inspectedId];
-    const status = seat.sold ? "Unavailable" : "Available";
+    const inCart = cart.includes(seat.id);
+    let status = "Available";
+    if (seat.sold) {
+        status = "Unavailable";
+    } else if (inCart) {
+        status = "In your cart";
+    }
 
     detailsEl.innerHTML = `
         <dl class="details">
@@ -150,10 +165,81 @@ function renderDetails() {
         </dl>
         <p class="price">${formatPrice(seat.price)}</p>
     `;
+    addBtn.disabled = seat.sold || inCart;
+    addBtn.textContent = inCart ? "Already in Cart" : "Add to Cart";
 }
+
+// small message under the Add to Cart button
+function showMessage(text, type) {
+    messageEl.textContent = text;
+    messageEl.className = "message " + (type || "");
+}
+
+// adds the selected seat to the cart after a few checks
+function addToCart() {
+    const seat = seats[inspectedId];
+
+    if (seat.sold) {
+        showMessage("This seat is unavailable.", "error");
+        return;
+    }
+    if (cart.includes(seat.id)) {
+        showMessage("This seat is already in your cart.", "error");
+        return;
+    }
+
+    cart.push(seat.id);
+    updateCart();
+    showMessage("Ticket added to your cart.", "success");
+}
+
+// updates the seat colours on the map, the cart and the details panel
+function updateCart() {
+    for (const id in seats) {
+        if (cart.includes(id)) {
+            seats[id].el.classList.add("in-cart");
+        } else {
+            seats[id].el.classList.remove("in-cart");
+        }
+    }
+    renderCart();
+    renderDetails();
+}
+
+// draws the list of tickets and the total price
+function renderCart() {
+    cartList.innerHTML = "";
+
+    if (cart.length === 0) {
+        cartList.innerHTML = `<li class="empty">Your cart is empty.</li>`;
+    }
+
+    let total = 0;
+    cart.forEach(id => {
+        const seat = seats[id];
+        total += seat.price;
+
+        const item = document.createElement("li");
+        item.className = "cart-item";
+        item.innerHTML = `
+            <div class="cart-seat">
+                <strong>${seat.section}</strong>
+                <span>Row ${seat.row}, Seat ${seat.number} - ${seat.category}</span>
+            </div>
+            <span class="cart-price">${formatPrice(seat.price)}</span>
+        `;
+        cartList.appendChild(item);
+    });
+
+    cartTotalEl.textContent = formatPrice(total);
+    cartCountEl.textContent = cart.length;
+    navCartCountEl.textContent = cart.length;
+}
+
+addBtn.addEventListener("click", addToCart);
 
 renderLegend();
 renderSummary();
 renderVenue();
-renderDetails();
+updateCart();
 startView();

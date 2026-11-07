@@ -13,6 +13,7 @@
         <nav class="navbar">
             <a href="#" class="brand">Royal Blue </a>
             <a href="#seats">Event Tickets</a>
+            <a href="#cart" class="nav-cart">Cart (<span id="nav-cart-count">0</span>)</a>
         </nav>
     </header>
 
@@ -45,6 +46,7 @@
             <ul class="legend states">
                 <li><span class="color-box available"></span> Available</li>
                 <li><span class="color-box inspected"></span> Selected</li>
+                <li><span class="color-box in-cart"></span> In cart</li>
                 <li><span class="color-box sold"></span> Unavailable</li>
             </ul>
         </section>
@@ -53,11 +55,17 @@
             <section class="panel">
                 <h2>Seat Details</h2>
                 <div id="seat-details"></div>
+                <button class="btn-primary" id="add-to-cart" disabled>Add to Cart</button>
+                <p class="message" id="message"></p>
             </section>
 
-            <section class="panel">
-                <h2>Cart</h2>
-                <p class="empty">Your cart is empty.</p>
+            <section class="panel" id="cart">
+                <h2>Cart <span class="count" id="cart-count">0</span></h2>
+                <ul class="cart-list" id="cart-list"></ul>
+                <div class="cart-total">
+                    <span>Total</span>
+                    <strong id="cart-total">0 AZN</strong>
+                </div>
             </section>
         </aside>
     </main>
