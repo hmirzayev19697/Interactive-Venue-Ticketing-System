@@ -1,5 +1,7 @@
 const venueEl = document.getElementById("venue");
 const ROW_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const STORAGE_KEY = "royalBlueCart";
+
 const legendEl = document.getElementById("legend");
 const summaryEl = document.getElementById("seat-summary");
 const detailsEl = document.getElementById("seat-details");
@@ -223,6 +225,19 @@ function updateCart() {
     }
     renderCart();
     renderDetails();
+    saveCart();
+}
+
+// the cart is saved in localStorage so it stays after a refresh
+function saveCart() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+}
+
+function loadCart() {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+        cart = JSON.parse(saved);
+    }
 }
 
 // the "... was removed" note shown where the ticket used to be
@@ -282,5 +297,6 @@ addBtn.addEventListener("click", addToCart);
 renderLegend();
 renderSummary();
 renderVenue();
+loadCart();
 updateCart();
 startView();
