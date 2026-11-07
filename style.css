@@ -485,6 +485,23 @@ h1, h2, h3 {
     color: var(--muted);
 }
 
+.btn-link {
+    border: none;
+    background: none;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.btn-link:hover {
+    color: #e89a9a;
+}
+
+.btn-link:disabled {
+    visibility: hidden;
+}
+
 /* cart */
 .cart-list {
     list-style: none;

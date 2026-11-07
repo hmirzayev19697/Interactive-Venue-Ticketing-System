@@ -1,6 +1,7 @@
 const venueEl = document.getElementById("venue");
 const ROW_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const STORAGE_KEY = "royalBlueCart";
+const MAX_TICKETS = 8;
 
 const legendEl = document.getElementById("legend");
 const summaryEl = document.getElementById("seat-summary");
@@ -11,6 +12,7 @@ const cartList = document.getElementById("cart-list");
 const cartTotalEl = document.getElementById("cart-total");
 const cartCountEl = document.getElementById("cart-count");
 const navCartCountEl = document.getElementById("nav-cart-count");
+const clearBtn = document.getElementById("clear-cart");
 
 // all seats by their id, e.g. seats["GZ-A1"]
 const seats = {};
@@ -171,8 +173,16 @@ function renderDetails() {
         </dl>
         <p class="price">${formatPrice(seat.price)}</p>
     `;
-    addBtn.disabled = seat.sold || inCart;
-    addBtn.textContent = inCart ? "Already in Cart" : "Add to Cart";
+    const cartFull = cart.length >= MAX_TICKETS;
+    addBtn.disabled = seat.sold || inCart || cartFull;
+
+    if (inCart) {
+        addBtn.textContent = "Already in Cart";
+    } else if (cartFull && !seat.sold) {
+        addBtn.textContent = `Limit of ${MAX_TICKETS} tickets`;
+    } else {
+        addBtn.textContent = "Add to Cart";
+    }
 }
 
 // small message under the Add to Cart button
@@ -212,6 +222,15 @@ function removeFromCart(id) {
         removed = null;
         renderCart();
     }, 5000);
+}
+
+function clearCart() {
+    if (confirm("Remove all tickets from your cart?")) {
+        cart = [];
+        removed = null;
+        updateCart();
+        showMessage("");
+    }
 }
 
 // updates the seat colours on the map, the cart and the details panel
@@ -290,9 +309,12 @@ function renderCart() {
     cartTotalEl.textContent = formatPrice(total);
     cartCountEl.textContent = cart.length;
     navCartCountEl.textContent = cart.length;
+    clearBtn.disabled = cart.length === 0;
 }
 
 addBtn.addEventListener("click", addToCart);
+
+clearBtn.addEventListener("click", clearCart);
 
 renderLegend();
 renderSummary();
