@@ -15,6 +15,10 @@ const seats = {};
 let inspectedId = null;
 let cart = [];
 
+// the ticket that was just removed and where it was in the cart
+let removed = null;
+let removedTimer = null;
+
 // turns a number into a price, e.g. 450 AZN
 function formatPrice(amount) {
     return amount + " " + venue.currency;
@@ -189,8 +193,23 @@ function addToCart() {
     }
 
     cart.push(seat.id);
+    removed = null;
     updateCart();
     showMessage("Ticket added to your cart.", "success");
+}
+
+function removeFromCart(id) {
+    removed = { id: id, position: cart.indexOf(id) };
+    cart = cart.filter(item => item !== id);
+    updateCart();
+    showMessage("");
+
+    // the note disappears after 5 seconds
+    clearTimeout(removedTimer);
+    removedTimer = setTimeout(() => {
+        removed = null;
+        renderCart();
+    }, 5000);
 }
 
 // updates the seat colours on the map, the cart and the details panel
@@ -206,16 +225,25 @@ function updateCart() {
     renderDetails();
 }
 
+// the "... was removed" note shown where the ticket used to be
+function createRemovedNote() {
+    const seat = seats[removed.id];
+    const note = document.createElement("li");
+    note.className = "cart-removed";
+    note.textContent = `${seat.section}, Row ${seat.row}, Seat ${seat.number} was removed`;
+    return note;
+}
+
 // draws the list of tickets and the total price
 function renderCart() {
     cartList.innerHTML = "";
 
-    if (cart.length === 0) {
-        cartList.innerHTML = `<li class="empty">Your cart is empty.</li>`;
-    }
-
     let total = 0;
-    cart.forEach(id => {
+    cart.forEach((id, position) => {
+        if (removed && removed.position === position) {
+            cartList.appendChild(createRemovedNote());
+        }
+
         const seat = seats[id];
         total += seat.price;
 
@@ -227,9 +255,22 @@ function renderCart() {
                 <span>Row ${seat.row}, Seat ${seat.number} - ${seat.category}</span>
             </div>
             <span class="cart-price">${formatPrice(seat.price)}</span>
+            <button class="remove" title="Remove">x</button>
         `;
+        item.querySelector(".remove").addEventListener("click", () => removeFromCart(id));
         cartList.appendChild(item);
     });
+
+    if (removed && removed.position >= cart.length) {
+        cartList.appendChild(createRemovedNote());
+    }
+
+    if (cart.length === 0) {
+        const empty = document.createElement("li");
+        empty.className = "empty";
+        empty.textContent = "Your cart is empty.";
+        cartList.appendChild(empty);
+    }
 
     cartTotalEl.textContent = formatPrice(total);
     cartCountEl.textContent = cart.length;

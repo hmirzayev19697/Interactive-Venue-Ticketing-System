@@ -516,6 +516,33 @@ h1, h2, h3 {
     font-weight: 600;
 }
 
+.remove {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.remove:hover {
+    border-color: var(--error);
+    background: var(--error);
+    color: var(--text);
+}
+
+.cart-removed {
+    margin: 8px 0;
+    padding: 8px 12px;
+    border: 1px dashed var(--muted);
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
 .cart-total {
     display: flex;
     justify-content: space-between;
