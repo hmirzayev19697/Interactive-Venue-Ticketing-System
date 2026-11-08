@@ -1,11 +1,11 @@
 :root{
-  --bg: #374c6f;
-  --panel: #12203a;
-  --panel-light: #1a2b4b;
-  --border: #253a5e;
-  --text: #e6ecf5;
-  --muted: #8a9ab5;
-  --accent-hover: #8fb4f0;
+  --bg: #2a211d;
+  --panel: #1c1613;
+  --panel-light: #2a211d;
+  --border: #3d312a;
+  --text: #f2ebe4;
+  --muted: #a8988c;
+  --accent-hover: #e8b06a;
   --success: #346e4c;
   --error: #6b2f2f;
 }
@@ -18,6 +18,11 @@ body {
     margin: 0;
     font-family: Helvetica, Arial, sans-serif; 
     background-color: var(--bg);
+    /* theatre photo behind everything, darkened so the boxes stand out */
+    background-image: linear-gradient(rgba(22, 17, 14, 0.8), rgba(22, 17, 14, 0.8)), url("images/theatre.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     color: var(--text);
     line-height: 1.5;
 }
@@ -39,7 +44,7 @@ h1, h2, h3 {
     max-width: 1400px;
     height: 64px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 32px 32px;
 }
 
 .navbar a {
@@ -72,10 +77,23 @@ h1, h2, h3 {
     background: var(--panel);
 }
 
+/* event poster at the top, the lower part fades into the page */
 .event-bar {
+    display: flex;
+    align-items: flex-end;
+    min-height: 420px;
+    background-image: linear-gradient(to bottom, transparent 30%, rgba(22, 17, 14, 0.95)), url("images/poster.jpg");
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.event-info {
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 32px 32px 0;
+    padding: 32px 32px;
 }
 
 .event-label {
@@ -107,6 +125,8 @@ h1, h2, h3 {
     display: grid;
     grid-template-columns: 1fr 340px;
     gap: 24px;
+    /* the map box does not stretch when the cart gets long */
+    align-items: start;
     max-width: 1400px;
     margin: 0 auto;
     padding: 24px 32px;
@@ -193,7 +213,7 @@ h1, h2, h3 {
     position: relative;
     height: 560px;
     border-radius: 4px;
-    background: #0c1727;
+    background: #120e0c;
     border: 1px solid var(--border);
     overflow: hidden;
     /* (bonus) no text selecting and no page scrolling while dragging the map */
@@ -293,7 +313,8 @@ h1, h2, h3 {
 }
 
 .color-box.sold {
-    background: #2a3a55;
+    background: transparent;
+    border: 1px solid #4a3f39;
 }
 
 .section h3 {
@@ -359,7 +380,9 @@ h1, h2, h3 {
     height: 18px;
     padding: 0;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px 8px 3px 3px;
+    /* light from above, for more comforting and just better visual look */
+    border-top: 2px solid rgba(255, 255, 255, 0.18);
     background: var(--muted);
     cursor: pointer;
 }
@@ -398,8 +421,9 @@ h1, h2, h3 {
 }
 
 .seat.sold {
-    background: #2a3a55;
+    background: transparent;
     cursor: not-allowed;
+    border: 1px solid #4a3f39;
 }
 
 .empty {
@@ -608,7 +632,11 @@ h1, h2, h3 {
     }
 
     .event-bar {
-        padding: 20px 16px 0;
+        min-height: 300px;
+    }
+
+    .event-info {
+        padding: 16px 16px;
     }
 
     .event-bar h1 {

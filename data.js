@@ -6,7 +6,7 @@ const venue = {
         gold: { name: "Gold Zone", price: 250 },
         standard: { name: "Standard", price: 100 },
         economy: { name: "Economy", price: 50 },
-        balcony: { name: "Balcony", price: 30 }
+        balcony: { name: "Balcony", price: 120 }
     },
 
     // aisles: a gap is placed after these seat numbers

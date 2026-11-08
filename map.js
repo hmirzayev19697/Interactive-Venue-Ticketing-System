@@ -4,7 +4,7 @@ const zoomLevelEl = document.getElementById("zoom-level");
 const zoomInBtn = document.getElementById("zoom-in");
 const zoomOutBtn = document.getElementById("zoom-out");
 
-const MIN_SCALE = 0.25;
+const MIN_SCALE = 0.75;
 const MAX_SCALE = 2.5;
 const ZOOM_STEP = 0.25;
 const MOVE_STEP = 80;
