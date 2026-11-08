@@ -289,14 +289,15 @@ function renderCart() {
         const item = document.createElement("li");
         item.className = "cart-item";
         item.innerHTML = `
-            <div class="cart-seat">
+            <button class="cart-seat">
                 <strong>${seat.section}</strong>
                 <span>Row ${seat.row}, Seat ${seat.number} - ${seat.category}</span>
-            </div>
+            </button>
             <span class="cart-price">${formatPrice(seat.price)}</span>
             <button class="remove" title="Remove">x</button>
         `;
         item.querySelector(".remove").addEventListener("click", () => removeFromCart(id));
+        item.querySelector(".cart-seat").addEventListener("click", () => inspectSeat(id));
         cartList.appendChild(item);
     });
 

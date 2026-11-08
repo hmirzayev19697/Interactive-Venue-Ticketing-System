@@ -139,3 +139,24 @@ window.addEventListener("pointermove", event => {
 window.addEventListener("pointerup", () => {
     isDragging = false;
 });
+
+// keyboard: after clicking the map, arrow keys move it and + / - zoom
+viewport.addEventListener("keydown", event => {
+    if (event.key === "ArrowUp") {
+        move(0, MOVE_STEP);
+    } else if (event.key === "ArrowDown") {
+        move(0, -MOVE_STEP);
+    } else if (event.key === "ArrowLeft") {
+        move(MOVE_STEP, 0);
+    } else if (event.key === "ArrowRight") {
+        move(-MOVE_STEP, 0);
+    } else if (event.key === "+" || event.key === "=") {
+        zoom(ZOOM_STEP);
+    } else if (event.key === "-") {
+        zoom(-ZOOM_STEP);
+    } else {
+        return;
+    }
+    // stops the arrow keys from also scrolling the page
+    event.preventDefault();
+});
